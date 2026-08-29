@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Vazirmatn', 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #F3F4F6;
+    color: #1E293B;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Vazirmatn', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-feature-settings: "ss01", "ss02";
+  }
+}
+
+/* High Density Dense UI Utilities */
+.dense-table th {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  background-color: #F8FAFC;
+  color: #64748B;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.dense-table td {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+/* Privacy masking for sensitive data protection */
+.privacy-mask {
+  filter: blur(5px);
+  transition: filter 0.2s ease, opacity 0.2s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.privacy-mask:hover,
+.privacy-mask:active,
+.privacy-mask.revealed {
+  filter: blur(0px);
+}
+
+.privacy-blur {
+  filter: blur(5px);
+  transition: filter 0.2s ease;
+  cursor: pointer;
+}
+
+.privacy-blur.revealed {
+  filter: blur(0px);
+}
+
+/* High Density Clean Elevation */
+.dense-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Custom High Density Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94A3B8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748B;
+}
+

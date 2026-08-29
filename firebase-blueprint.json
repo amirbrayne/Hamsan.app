@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "entities": {
+    "users": {
+      "collectionName": "users",
+      "description": "کاربران سامانه، مشاوران، مدیران و کارشناسان مرکز",
+      "fields": {
+        "id": { "type": "string", "description": "شناسه یکتای کاربر" },
+        "name": { "type": "string", "description": "نام و نام خانوادگی کاربر" },
+        "email": { "type": "string", "description": "آدرس ایمیل" },
+        "role": { "type": "string", "description": "نقش دسترسی: main_admin | internal_manager | employee | counselor | applicant" },
+        "roleTitle": { "type": "string", "description": "عنوان فارسی نقش" },
+        "avatar": { "type": "string", "description": "تصویر پروفایل" },
+        "phone": { "type": "string", "description": "شماره تماس" },
+        "department": { "type": "string", "description": "بخش سازمانی" },
+        "assignedCount": { "type": "number", "description": "تعداد پرونده‌های منتسب" },
+        "createdAt": { "type": "string", "description": "تاریخ ایجاد" }
+      }
+    },
+    "applicants": {
+      "collectionName": "applicants",
+      "description": "پرونده‌های جامع مراجعین همسان‌گزینی و ازدواج",
+      "fields": {
+        "id": { "type": "string", "description": "شناسه پرونده" },
+        "caseCode": { "type": "string", "description": "کد اختصاصی پرونده" },
+        "category": { "type": "string", "description": "دسته‌بندی متقاضی" },
+        "registrationDate": { "type": "string", "description": "تاریخ ثبت پرونده" },
+        "registrationMethod": { "type": "string", "description": "نحوه تشکیل پرونده" },
+        "workflowStatus": { "type": "string", "description": "مرحله فرآیندی جاری" },
+        "status": { "type": "string", "description": "وضعیت فعال بودن پرونده" },
+        "isVip": { "type": "boolean", "description": "عضویت VIP" },
+        "photoUrl": { "type": "string", "description": "آدرس تصویر متقاضی" },
+        "counselorId": { "type": "string", "description": "شناسه مشاور مسئول" },
+        "counselorName": { "type": "string", "description": "نام مشاور مسئول" },
+        "assignedEmployeeId": { "type": "string", "description": "شناسه کارشناس پرونده" },
+        "assignedEmployeeName": { "type": "string", "description": "نام کارشناس پرونده" },
+        "firstName": { "type": "string", "description": "نام" },
+        "lastName": { "type": "string", "description": "نام خانوادگی" },
+        "nationalId": { "type": "string", "description": "کد ملی" },
+        "phone": { "type": "string", "description": "شماره تماس همراه" },
+        "guardianPhone": { "type": "string", "description": "شماره تماس معرف یا ولی" },
+        "gender": { "type": "string", "description": "جنسیت (male/female)" },
+        "birthDate": { "type": "string", "description": "تاریخ تولد" },
+        "birthYear": { "type": "number", "description": "سال تولد" },
+        "age": { "type": "number", "description": "سن" },
+        "birthPlace": { "type": "string", "description": "محل تولد" },
+        "residenceCity": { "type": "string", "description": "شهر سکونت" },
+        "province": { "type": "string", "description": "استان" },
+        "address": { "type": "string", "description": "آدرس سکونت" },
+        "nationalityOrigin": { "type": "string", "description": "اصالت و قومیت" },
+        "height": { "type": "number", "description": "قد" },
+        "weight": { "type": "number", "description": "وزن" },
+        "maritalHistory": { "type": "object", "description": "سابقه تأهل قبلی و فرزندان" },
+        "healthLifestyle": { "type": "object", "description": "وضعیت سلامت، دخانیات و سبک زندگی" },
+        "educationSkills": { "type": "object", "description": "تحصیلات، دانشگاه و مهارت‌ها" },
+        "careerFinancial": { "type": "object", "description": "شغل، درآمد، بیمه، مسکن، خودرو، سربازی" },
+        "religiousValues": { "type": "object", "description": "دین، مذهب، مرجع، نماز، روزه، خمس، پوشش" },
+        "familyInfo": { "type": "object", "description": "اطلاعات والدین، خواهران و برادران، فرهنگ و اقتصاد" },
+        "personality": { "type": "object", "description": "آزمون MBTI، سبک دلبستگی، Big Five و یادداشت‌های بالینی" },
+        "marriagePreferences": { "type": "object", "description": "ملاک‌ها، خط قرمزها و ترجیحات همسرگزینی" },
+        "files": { "type": "array", "description": "مدارک هویتی و تحصیلی بارگذاری‌شده" },
+        "qualityScore": { "type": "number", "description": "نمره کیفیت اطلاعات پرونده" },
+        "completionPercentage": { "type": "number", "description": "درصد تکمیل پرونده" },
+        "lastUpdate": { "type": "string", "description": "زمان آخرین تغییر" }
+      }
+    },
+    "introductions": {
+      "collectionName": "introductions",
+      "description": "پرونده‌های معرفی و مراحل آشنایی و خواستگاری",
+      "fields": {
+        "id": { "type": "string", "description": "شناسه معرفی" },
+        "introCode": { "type": "string", "description": "کد پیگیری معرفی" },
+        "maleApplicantId": { "type": "string", "description": "شناسه متقاضی آقا" },
+        "maleApplicantName": { "type": "string", "description": "نام متقاضی آقا" },
+        "maleFileCode": { "type": "string", "description": "کد پرونده آقا" },
+        "maleAge": { "type": "number", "description": "سن آقا" },
+        "maleJob": { "type": "string", "description": "شغل آقا" },
+        "femaleApplicantId": { "type": "string", "description": "شناسه متقاضی خانم" },
+        "femaleApplicantName": { "type": "string", "description": "نام متقاضی خانم" },
+        "femaleFileCode": { "type": "string", "description": "کد پرونده خانم" },
+        "femaleAge": { "type": "number", "description": "سن خانم" },
+        "femaleJob": { "type": "string", "description": "شغل خانم" },
+        "createdDate": { "type": "string", "description": "تاریخ ثبت معرفی" },
+        "compatibilityScore": { "type": "number", "description": "درصد انطباق و سازگاری" },
+        "status": { "type": "string", "description": "وضعیت: pending | contacted | meeting | successful | rejected" },
+        "statusFa": { "type": "string", "description": "عنوان وضعیت" },
+        "stageName": { "type": "string", "description": "نام مرحله" },
+        "rejectionReason": { "type": "string", "description": "علت عدم توافق در صورت وجود" },
+        "meetingDate": { "type": "string", "description": "تاریخ جلسه معارفه" },
+        "meetingLocation": { "type": "string", "description": "محل جلسه" },
+        "counselorId": { "type": "string", "description": "شناسه مشاور ناظر" },
+        "counselorName": { "type": "string", "description": "نام مشاور ناظر" },
+        "notes": { "type": "string", "description": "یادداشت‌ها و پیگیری‌ها" },
+        "timeline": { "type": "array", "description": "گاه‌شمار وقایع و اقدامات صورت‌گرفته" }
+      }
+    },
+    "counseling_sessions": {
+      "collectionName": "counseling_sessions",
+      "description": "جلسات و نوبت‌های مشاوره پیش از ازدواج و ارزیابی روان‌شناختی",
+      "fields": {
+        "id": { "type": "string", "description": "شناسه جلسه" },
+        "applicantId": { "type": "string", "description": "شناسه مراجع" },
+        "applicantName": { "type": "string", "description": "نام مراجع" },
+        "applicantFileCode": { "type": "string", "description": "کد پرونده مراجع" },
+        "sessionNumber": { "type": "number", "description": "شماره جلسه" },
+        "title": { "type": "string", "description": "عنوان جلسه" },
+        "sessionDate": { "type": "string", "description": "تاریخ برگزاری" },
+        "sessionTime": { "type": "string", "description": "ساعت برگزاری" },
+        "roomNumber": { "type": "string", "description": "شماره اتاق مشاوره" },
+        "counselorId": { "type": "string", "description": "شناسه مشاور" },
+        "counselorName": { "type": "string", "description": "نام مشاور" },
+        "topics": { "type": "array", "description": "محورهای مطرح‌شده" },
+        "summary": { "type": "string", "description": "خلاصه جلسه" },
+        "privateNotes": { "type": "string", "description": "یادداشت‌های محرمانه بالینی" },
+        "readinessScore": { "type": "number", "description": "شاخص آمادگی ازدواج" },
+        "homework": { "type": "string", "description": "تکالیف روان‌شناختی" },
+        "status": { "type": "string", "description": "وضعیت: scheduled | completed | cancelled" }
+      }
+    },
+    "tasks": {
+      "collectionName": "tasks",
+      "description": "وظایف، پیگیری‌ها و یادآوری‌های کارشناسان مرکز",
+      "fields": {
+        "id": { "type": "string", "description": "شناسه وظیفه" },
+        "title": { "type": "string", "description": "عنوان وظیفه" },
+        "description": { "type": "string", "description": "توضیحات تکمیلی" },
+        "priority": { "type": "string", "description": "اولویت (urgent, medium, low)" },
+        "isDone": { "type": "boolean", "description": "وضعیت انجام" },
+        "dueDate": { "type": "string", "description": "مهلت اقدام" },
+        "dueTime": { "type": "string", "description": "ساعت اقدام" },
+        "assignedRole": { "type": "string", "description": "نقش مسئول" },
+        "assignedUserName": { "type": "string", "description": "نام کاربر مسئول" },
+        "relatedApplicantId": { "type": "string", "description": "شناسه پرونده مرتبط" },
+        "relatedApplicantName": { "type": "string", "description": "نام مراجع مرتبط" },
+        "relatedApplicantPhone": { "type": "string", "description": "تلفن مراجع" },
+        "type": { "type": "string", "description": "نوع وظیفه" }
+      }
+    },
+    "audit_logs": {
+      "collectionName": "audit_logs",
+      "description": "ثبت لاگ‌های امنیتی، ردپای دیجیتال و ممیزی سیستم",
+      "fields": {
+        "id": { "type": "string", "description": "شناسه لاگ" },
+        "timestamp": { "type": "string", "description": "زمان وقوع" },
+        "userId": { "type": "string", "description": "شناسه کاربر مجری" },
+        "userName": { "type": "string", "description": "نام کاربر مجری" },
+        "userRole": { "type": "string", "description": "نقش کاربر" },
+        "action": { "type": "string", "description": "نوع اقدام" },
+        "targetEntity": { "type": "string", "description": "موجودیت هدف" },
+        "targetId": { "type": "string", "description": "شناسه موجودیت" },
+        "details": { "type": "string", "description": "شرح عملیات" }
+      }
+    }
+  },
+  "securityRules": {
+    "read": "isAuthenticated()",
+    "write": "isAuthenticated() && (isAdmin() || isManager() || isCounselor() || isEmployee())"
+  }
+}

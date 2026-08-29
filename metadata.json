@@ -1,0 +1,6 @@
+{
+  "name": "مرکز مشاوره و همسان‌گزینی الزهرا (CRM)",
+  "description": "سامانه جامع مدیریت پرونده‌ها، مشاوره و همسان‌گزینی هوشمند مرکز مشاوره و پیوند خانواده الزهرا (س)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
