@@ -19,7 +19,9 @@ import { getTodayJalali } from '../utils/persianDate';
 
 export type NavTab =
   | 'dashboard'
+  | 'universal_search'
   | 'applicants'
+  | 'intake'
   | 'matching'
   | 'introductions'
   | 'counseling'
@@ -39,11 +41,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setActiveTab,
   onOpenNewApplicant,
 }) => {
-  const { currentUser, setCurrentUser, users, isGlobalUnmasked, toggleGlobalUnmask } = useCRMStore();
+  const { currentUser, setCurrentUser, users, isGlobalUnmasked, toggleGlobalUnmask, applicants } = useCRMStore();
+
+  const userRole = (currentUser?.role || '').toUpperCase();
+  const isAdmin = userRole === 'ADMIN' || userRole === 'MAIN_ADMIN';
+  const isManager = userRole === 'INTERNAL_MANAGER';
+  const isCounselor = userRole === 'COUNSELOR';
+  const isEmployee = userRole === 'EMPLOYEE';
 
   const mainNavItems: { id: NavTab; label: string; icon: React.ReactNode; badge?: string }[] = [
     { id: 'dashboard', label: 'داشبورد مدیریت', icon: <LayoutDashboard className="w-4 h-4" /> },
-    { id: 'applicants', label: 'مدیریت متقاضیان', icon: <FolderKanban className="w-4 h-4" />, badge: '۸۴۲' },
+    {
+      id: 'universal_search',
+      label: 'جستجوی سراسری و شیلد',
+      icon: <FolderKanban className="w-4 h-4 text-amber-400" />,
+      badge: `${applicants.length}`,
+    },
+    { id: 'applicants', label: 'بانک پرونده‌ها', icon: <UserCheck className="w-4 h-4" /> },
+    { id: 'intake', label: 'فرم پذیرش (Intake)', icon: <UserPlus className="w-4 h-4 text-emerald-400" /> },
     { id: 'matching', label: 'موتور هوشمند تطابق', icon: <Sparkles className="w-4 h-4 text-amber-400" /> },
     { id: 'introductions', label: 'معرفی و پیگیری', icon: <Users2 className="w-4 h-4" /> },
   ];
@@ -51,8 +66,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const operationsNavItems: { id: NavTab; label: string; icon: React.ReactNode; badge?: string }[] = [
     { id: 'counseling', label: 'جلسات مشاوره', icon: <BrainCircuit className="w-4 h-4" /> },
     { id: 'tasks', label: 'وظایف و پیگیری‌ها', icon: <CheckSquare2 className="w-4 h-4" /> },
-    { id: 'reports', label: 'گزارشات تحلیلی', icon: <BarChart3 className="w-4 h-4" /> },
-    { id: 'rbac', label: 'کاربران و دسترسی‌ها', icon: <ShieldCheck className="w-4 h-4" /> },
+    ...(!isEmployee
+      ? [{ id: 'reports' as NavTab, label: 'گزارشات تحلیلی', icon: <BarChart3 className="w-4 h-4" /> }]
+      : []),
+    ...(isAdmin
+      ? [{ id: 'rbac' as NavTab, label: 'کاربران و دسترسی‌ها', icon: <ShieldCheck className="w-4 h-4 text-amber-400" /> }]
+      : []),
   ];
 
   return (

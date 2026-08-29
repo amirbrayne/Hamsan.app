@@ -1,57 +1,9 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    
-    // Auth & Role check helpers
-    function isSignedIn() {
-      return request.auth != null;
-    }
-    
-    // User role check against Firestore users collection
-    function isStaff() {
-      return isSignedIn() && (
-        request.auth.token.role in ['main_admin', 'ADMIN', 'internal_manager', 'INTERNAL_MANAGER', 'counselor', 'COUNSELOR', 'employee', 'EMPLOYEE'] ||
-        firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
-      );
-    }
-    
-    function isAdminOrManager() {
-      return isSignedIn() && (
-        request.auth.token.role in ['main_admin', 'ADMIN', 'internal_manager', 'INTERNAL_MANAGER'] ||
-        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role in ['main_admin', 'internal_manager']
-      );
-    }
-
-    // Public Assets (e.g. system branding icons)
-    match /public/{allPaths=**} {
-      allow read: if true;
-      allow write: if isAdminOrManager();
-    }
-
-    // Confidential Applicant Photos & Identity Documents
-    match /applicant_documents/{applicantId}/{allPaths=**} {
-      allow read: if isStaff() || (isSignedIn() && request.auth.uid == applicantId);
-      allow write: if isStaff() && request.resource.size < 15 * 1024 * 1024; // 15MB limit
-      allow delete: if isAdminOrManager();
-    }
-
-    match /applicant_photos/{applicantId}/{allPaths=**} {
-      allow read: if isStaff() || (isSignedIn() && request.auth.uid == applicantId);
-      allow write: if isStaff() && request.resource.size < 5 * 1024 * 1024; // 5MB limit
-      allow delete: if isAdminOrManager();
-    }
-
-    // General Documents folder
-    match /documents/{allPaths=**} {
-      allow read: if isStaff();
-      allow write: if isStaff() && request.resource.size < 20 * 1024 * 1024;
-      allow delete: if isAdminOrManager();
-    }
-
-    // User Avatar uploads
-    match /users/{userId}/{allPaths=**} {
-      allow read: if isSignedIn();
-      allow write: if isSignedIn() && (request.auth.uid == userId || isAdminOrManager());
+    match /applicants/{applicantId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.resource.size < 5 * 1024 * 1024 && request.resource.contentType.matches('image/.*');
     }
   }
 }
